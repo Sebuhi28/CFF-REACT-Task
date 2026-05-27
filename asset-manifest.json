@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/CFF-REACT-Task/static/css/main.28a09358.css",
+    "main.css": "/CFF-REACT-Task/static/css/main.03b7ae39.css",
     "main.js": "/CFF-REACT-Task/static/js/main.48dc4f74.js",
     "index.html": "/CFF-REACT-Task/index.html",
-    "main.28a09358.css.map": "/CFF-REACT-Task/static/css/main.28a09358.css.map",
+    "main.03b7ae39.css.map": "/CFF-REACT-Task/static/css/main.03b7ae39.css.map",
     "main.48dc4f74.js.map": "/CFF-REACT-Task/static/js/main.48dc4f74.js.map"
   },
   "entrypoints": [
-    "static/css/main.28a09358.css",
+    "static/css/main.03b7ae39.css",
     "static/js/main.48dc4f74.js"
   ]
 }
