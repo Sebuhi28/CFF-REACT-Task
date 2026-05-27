@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/CFF-REACT-Task/static/css/main.28a09358.css",
+    "main.js": "/CFF-REACT-Task/static/js/main.bf34536b.js",
+    "index.html": "/CFF-REACT-Task/index.html",
+    "main.28a09358.css.map": "/CFF-REACT-Task/static/css/main.28a09358.css.map",
+    "main.bf34536b.js.map": "/CFF-REACT-Task/static/js/main.bf34536b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.28a09358.css",
+    "static/js/main.bf34536b.js"
+  ]
+}
