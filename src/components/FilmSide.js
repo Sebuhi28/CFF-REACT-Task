@@ -1,6 +1,23 @@
 import "../components_css/FilmSide.css";
 import { useEffect, useState } from 'react';
 
+const defaultIds = [
+    'tt0111161', // The Shawshank Redemption
+    'tt0068646', // The Godfather
+    'tt0071562', // The Godfather: Part II
+    'tt0468569', // The Dark Knight
+    'tt0050083', // 12 Angry Men
+    'tt0108052', // Schindler's List
+    'tt0137523', // Fight Club
+    'tt0110912', // Pulp Fiction
+    'tt0120737', // The Lord of the Rings: The Fellowship
+    'tt0167260', // The Lord of the Rings: The Two Towers
+    'tt0080684', // Star Wars: Episode V - The Empire Strikes Back
+    'tt0133093', // The Matrix
+    'tt0109830', // Forrest Gump
+    'tt1375666', // Inception
+    'tt0169547', // American Beauty
+];
 
 export default function FilmSide({ movieId, searchQuery, onSelectMovie, addFavorite }) {
     const [movies, setMovies] = useState([]);
@@ -13,28 +30,10 @@ export default function FilmSide({ movieId, searchQuery, onSelectMovie, addFavor
 
     const apiKey = '24f9a32a';
 
-    const defaultIds = [
-        'tt0111161', // The Shawshank Redemption
-        'tt0068646', // The Godfather
-        'tt0071562', // The Godfather: Part II
-        'tt0468569', // The Dark Knight
-        'tt0050083', // 12 Angry Men
-        'tt0108052', // Schindler's List
-        'tt0137523', // Fight Club
-        'tt0110912', // Pulp Fiction
-        'tt0120737', // The Lord of the Rings: The Fellowship
-        'tt0167260', // The Lord of the Rings: The Two Towers
-        'tt0080684', // Star Wars: Episode V - The Empire Strikes Back
-        'tt0133093', // The Matrix
-        'tt0109830', // Forrest Gump
-        'tt1375666', // Inception
-        'tt0169547', // American Beauty
-    ];
-
     useEffect(() => {
         const fetchSearch = (query) => {
             setLoadingList(true);
-            const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}&type=movie`;
+            const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}&type=movie`;
 
             fetch(url)
                 .then(response => response.json())
@@ -62,10 +61,9 @@ export default function FilmSide({ movieId, searchQuery, onSelectMovie, addFavor
             while (ids.length < 10 && idsCopy.length > 0) {
                 const idx = Math.floor(Math.random() * idsCopy.length);
                 ids.push(idsCopy.splice(idx, 1)[0]);
-            }
-        const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchQuery)}&type=movie`;
+            };
             try {
-                const promises = ids.map(id => fetch(`http://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(id)}`).then(r => r.json()));
+                const promises = ids.map(id => fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(id)}`).then(r => r.json()));
                 const results = await Promise.all(promises);
                 const good = results.filter(r => r && r.Response === 'True');
                 const mapped = good.map(r => ({ imdbID: r.imdbID, Title: r.Title, Year: r.Year, Poster: r.Poster }));
@@ -94,7 +92,7 @@ export default function FilmSide({ movieId, searchQuery, onSelectMovie, addFavor
         }
 
         setLoadingDetail(true);
-        const url = `http://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(movieId)}&plot=full`;
+        const url = `https://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(movieId)}&plot=full`;
 
         fetch(url)
             .then(response => response.json())
