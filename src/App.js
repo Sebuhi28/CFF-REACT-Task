@@ -13,7 +13,7 @@ function App() {
   const handleAddFavorite = (movie) => {
     if (!movie || !movie.id) return;
     const id = movie.id || movie.imdbID;
-    const title = movie.title || movie.Title || '';
+    const title = movie.title || movie.Title || ''; 
     const year = movie.releaseYear || movie.Year || (movie.release_date ? movie.release_date.split('-')[0] : 'Unknown');
     const poster = movie.poster || movie.Poster || null;
 

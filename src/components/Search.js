@@ -10,12 +10,6 @@ export default function Search({ onSelectMovie, onSearch }) {
         if (onSearch) onSearch(q);
     };
 
-    const handleMovieClick = (movieId) => {
-        if (onSelectMovie) onSelectMovie(movieId);
-        setQuery('');
-        if (onSearch) onSearch('');
-    };
-
     return (
         <div className="search">
             <form onSubmit={handleSearch}>
