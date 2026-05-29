@@ -54,26 +54,31 @@ export default function FilmSide({ movieId, searchQuery, onSelectMovie, addFavor
                 });
         };
         setLoadingList(true);
-        const fetchDefaults = async () => {
+        const fetchDefaults = () => {
             setLoadingList(true);
             const ids = [];
             const idsCopy = [...defaultIds];
             while (ids.length < 10 && idsCopy.length > 0) {
                 const idx = Math.floor(Math.random() * idsCopy.length);
                 ids.push(idsCopy.splice(idx, 1)[0]);
-            };
-            try {
-                const promises = ids.map(id => fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(id)}`).then(r => r.json()));
-                const results = await Promise.all(promises);
-                const good = results.filter(r => r && r.Response === 'True');
-                const mapped = good.map(r => ({ imdbID: r.imdbID, Title: r.Title, Year: r.Year, Poster: r.Poster }));
-                setMovies(mapped);
-                setListError('');
-            } catch (err) {
-                console.error('Error loading default movies:', err);
-                setListError('Movie list could not be loaded.');
             }
-            setLoadingList(false);
+
+            const promises = ids.map(id => fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(id)}`).then(r => r.json()));
+
+            Promise.all(promises)
+                .then(results => {
+                    const good = results.filter(r => r && r.Response === 'True');
+                    const mapped = good.map(r => ({ imdbID: r.imdbID, Title: r.Title, Year: r.Year, Poster: r.Poster }));
+                    setMovies(mapped);
+                    setListError('');
+                })
+                .catch(err => {
+                    console.error('Error loading default movies:', err);
+                    setListError('Movie list could not be loaded.');
+                })
+                .finally(() => {
+                    setLoadingList(false);
+                });
         };
 
         if (!searchQuery || !searchQuery.trim()) {
